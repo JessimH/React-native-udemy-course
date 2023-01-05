@@ -1,30 +1,47 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text> Hello World! </Text>
-      <View>
-        <Text style={styles.textStyle}>2eme text</Text>
+    <View style={styles.appContainer}>
+      {/* INPUT AREA */}
+      <View style={styles.inputContainer}>
+        <TextInput placeholder='your first goal' style={styles.textInput} />
+        <Button title='add goal' />
       </View>
-      <Button title="Click me" onPress={() => alert('Hello World!')} />
+
+      {/* LIST AREA */}
+      <View style={styles.goalsContainer}>
+        <Text>List of goals</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  appContainer: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    paddingTop: 50,
+    paddingHorizontal: 16,
   },
-  textStyle: {
+  inputContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: '#cccccc',
+  },
+  textInput: {
     borderWidth: 1,
-    borderColor: 'red',
-    color: 'red',
-    marginTop: 10,
-    padding: 16,
+    borderColor: '#cccccc',
+    width: '70%',
+    marginRight: 12,
+    padding: 8,
+  },
+  goalsContainer: {
+    flex: 5,
   }
+
 });

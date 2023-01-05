@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
 
 export default function App() {
 
@@ -12,7 +12,8 @@ export default function App() {
   }
 
   function addGoalHandler() {
-    setGoals(currentGoals => [...currentGoals, enteredGoalText]);
+    setGoals(currentGoals => [...currentGoals,
+    { text: enteredGoalText, id: Math.random().toString() }]);
   }
 
   return (
@@ -28,14 +29,26 @@ export default function App() {
 
       {/* LIST AREA */}
       <View style={styles.goalsContainer}>
-        <ScrollView alwaysBounceVertical={false}>
+        {/* <ScrollView alwaysBounceVertical={false}>
           {goals.map((goal, index) => (
             <View key={index} style={styles.goalItem}>
               <Text style={styles.goalText}>{goal}</Text>
             </View>
           )
           )}
-        </ScrollView>
+        </ScrollView> */}
+
+        <FlatList
+          alwaysBounceVertical={false}
+          data={goals}
+          keyExtractor={(itemData, index) => itemData.id}
+          renderItem={itemData => {
+            return (
+              <View style={styles.goalItem}>
+                <Text style={styles.goalText}>{itemData.item.text}</Text>
+              </View>
+            )
+          }} />
       </View>
     </View>
   );

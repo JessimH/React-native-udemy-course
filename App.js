@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView } from 'react-native';
 
 export default function App() {
 
@@ -28,7 +28,14 @@ export default function App() {
 
       {/* LIST AREA */}
       <View style={styles.goalsContainer}>
-        {goals.map((goal, index) => <Text key={index}>{goal}</Text>)}
+        <ScrollView alwaysBounceVertical={false}>
+          {goals.map((goal, index) => (
+            <View key={index} style={styles.goalItem}>
+              <Text style={styles.goalText}>{goal}</Text>
+            </View>
+          )
+          )}
+        </ScrollView>
       </View>
     </View>
   );
@@ -58,6 +65,16 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 5,
+  },
+  goalItem: {
+    margin: 8,
+    padding: 8,
+    color: '#ffffff',
+    borderRadius: 6,
+    backgroundColor: '#5e0acc',
+  },
+  goalText: {
+    color: '#ffffff',
   }
 
 });
